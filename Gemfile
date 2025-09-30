@@ -10,34 +10,27 @@ gem 'sass-rails', '~> 5.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
-
-# Use Unicorn as the app server
-# gem 'unicorn'
-
+# MovieDB API
 gem 'themoviedb'
 
-# Window support
+# Windows support
 gem 'tzinfo'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  # Debugging
   gem 'byebug'
 
+  # Testing
   gem 'rspec-rails'
   gem 'guard-rspec'
 
-  # Use sqlite3 as the database for Active Record
-  gem 'sqlite3', '~> 2.1'
-
-end
-
-group :development do
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  # gem 'web-console', '~> 2.0'
+  # Use SQLite3 locally
+  gem 'sqlite3', '~> 1.4'
 end
 
 group :production do
-  gem 'pg', '~> 1.1' # for Heroku deployment
-  gem 'rails_12factor'
+  # Use PostgreSQL on Heroku
+  gem 'pg', '~> 1.5'
 end
+
