@@ -11,15 +11,26 @@ class MoviesController < ApplicationController
 
     if params[:ratings].present?
       @ratings_to_show = params[:ratings].keys
-      @movies = Movie.with_ratings(@ratings_to_show)
+      session[:ratings] = params[:ratings]
+    elsif session[:ratings].present?
+      @ratings_to_show = session[:ratings].keys
     else
       @ratings_to_show = @all_ratings
-      @movies = Movie.all
     end
 
-    @sort_by = params[:sort_by] || 'title'
-    @movies = @movies.order(@sort_by)
+    if params[:sort_by].present?
+      @sort_by = params[:sort_by]
+      session[:sort_by] = @sort_by
+    elsif session[:sort_by].present?
+      @sort_by = session[:sort_by]
+    else
+      @sort_by = nil
+    end
+
+    @movies = Movie.with_ratings(@ratings_to_show)
+    @movies = @movies.order(@sort_by) if @sort_by
   end
+
 
   def new
     # default: render 'new' template
